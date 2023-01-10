@@ -1,5 +1,7 @@
 <?php get_header() ?>
 
+    <?php if (function_exists('yoast_breadcrumb')) { yoast_breadcrumb('<p>', '</p>'); } ?>
+
     <?php get_template_part( 'post-detail' ) ?>
 
     <?php get_template_part( 'sidebar-category' ) ?>

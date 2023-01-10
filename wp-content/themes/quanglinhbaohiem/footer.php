@@ -1,12 +1,27 @@
         <footer class="footer py-4">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-4 text-lg-start">Copyright &copy; Your Website 2022</div>
+                    <div class="col-lg-4 text-lg-start">Về chúng tôi</div>
                     <div class="col-lg-4 my-3 my-lg-0">
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <!-- 2.Code lấy 10 bài viết mới nhất theo category. -->
+                        <!-- Get post News Query -->
+                        <?php $getposts = new WP_query(); $getposts->query('post_status=publish&showposts=1&post_type=page&p=65'); ?>
+                        <?php global $wp_query; $wp_query->in_the_loop = true; ?>
+                        <?php while ($getposts->have_posts()) : $getposts->the_post(); ?>
+                            <h3><?php the_title() ?></h3>
+                            <?php the_excerpt( ) ?>
+                            <a href="<?php the_permalink() ?>">Xem thêm</a>
+                        <?php endwhile; wp_reset_postdata(); ?>
+                        <!-- Get post News Query -->
+                        <!-- Get category -->
                     </div>
+                    
+                    <div class="col-lg-4 my-3 my-lg-0">
+                        <!-- Get post News Query -->
+                        <h3>Liên hệ</h3>
+                        <span>Tại đây <a href="<?php bloginfo('url') ?>/lien-he">Tại đây</a> </span>
+                    </div>
+
                     <div class="col-lg-4 text-lg-end">
                         <ul>
                             <?php
@@ -19,7 +34,6 @@
                                 <li>
                                     <a class="link-dark text-decoration-none" href="<?php echo get_term_link($category -> slug, 'category');?>">
                                         <?php echo $category -> name ; ?>
-                                        (<?php echo $category -> count; ?>)
                                     </a>
                                 </li>
                             <?php } ?>
